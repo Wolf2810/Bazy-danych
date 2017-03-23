@@ -1,0 +1,8 @@
+SELECT o.imie,o.nazwisko,e.pensja,e.id_firmy , m.maksymalna
+FROM osoby o
+JOIN etaty e ON o.id_osoby = e.id_osoby 
+JOIN 
+( SELECT e.id_firmy, MAX(e.pensja) AS maksymalna 
+FROM etaty e
+GROUP BY e.id_firmy) AS m ON m.id_firmy = e.id_firmy
+WHERE e.pensja = m.maksymalna;
